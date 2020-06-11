@@ -29,11 +29,15 @@ PIP = optimum_pip['PIP'].tolist()
 
 # factor_list =  [0.75,0.8,0.85,0.9,0.95,1,1.05,1.10,1.15,1.2,1.25]
 # factor_list = [1]
-factor_list = [0.3]
+factor_list = [1]
+# n_list = list(range(1,50,5))
+# m_list = list(range(25,100,5))
 
+n_list = [46,41,36,26,1]
+m_list = [80,90,80,75,70]
 
-for factor in factor_list:
-    
+for n,m in zip(n_list,m_list):
+
     try:
         del dates_ml
     except:
@@ -155,13 +159,13 @@ for factor in factor_list:
             
             checker = 'no'
 
-            if tags['DATE'].iloc[i] == '08.02' and instrument_name =='EURAUD':
-                print('here')
+            # if tags['DATE'].iloc[i] == '08.02' and instrument_name =='EURAUD':
+            #     print('here')
 
 
             #CALCULATING THE MA
-            n= 5            
-            m = 10
+            # n= 5            
+            # m = 10
             if len(close_pricing_list_1) < n:
                 close_pricing_list_1.append(day['oanda_open'].iloc[24])
                 
@@ -256,7 +260,7 @@ for factor in factor_list:
 
                 
                 
-                if counter >= 1:
+                if counter >= 5:
                     loss = 1
                     counter = 0
                     days.append(tags['test'].str[:10].iloc[i])
@@ -279,11 +283,11 @@ for factor in factor_list:
                 #     counter += 0.2
                 #if the order has been activated just go through standard checking now
                 if checker == 'yes':
-                    # if moving_average_1 - moving_average_2 < 0:
-                    if action < 0:
+                    if moving_average_1 - moving_average_2 < 0:
+                    # if action < 0:
                     
                         #stop loss tester
-                        if high > ((stop_loss)* factor)-spread:
+                        if high > ((stop_loss))-spread:
                             counter += 1
                             
                             
@@ -296,8 +300,8 @@ for factor in factor_list:
                             
                             break
 
-                    # if moving_average_1 - moving_average_2 > 0:
-                    if action > 0:
+                    if moving_average_1 - moving_average_2 > 0:
+                    # if action > 0:
                     
 
                         #take profit tester
@@ -308,7 +312,7 @@ for factor in factor_list:
                             break
 
                         #stop loss tester
-                        if low < ((stop_loss *(-1)) * factor) + spread:
+                        if low < ((stop_loss *(-1))) + spread:
                             counter += 1
                             
                             
@@ -350,10 +354,10 @@ for factor in factor_list:
     # dates_ml.dropna(subset = ['AUDNZD'], inplace = True)
 
     # print(dates_ml.head())
-    dates_ml.to_csv('Moving_Average_results/adjusted_SL_is' + str(factor) + '.csv')
+    dates_ml.to_csv('Results/Optimal Moving Average ' + str(n) + "_" + str(m) + '.csv')
 
-    print(column_sum(dates_ml))
-    print(number_of_misses)
-    print(total)
+    print("the MA for this is " + str(n) + " and " + str(m) + ":   " + str(column_sum(dates_ml)))
+    # print(number_of_misses)
+    # print(total)
         
 
