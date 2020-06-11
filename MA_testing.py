@@ -33,8 +33,8 @@ factor_list = [1]
 # n_list = list(range(1,50,5))
 # m_list = list(range(25,100,5))
 
-n_list = [46,41,36,26,1]
-m_list = [80,90,80,75,70]
+n_list = [50,41,36,26,1]
+m_list = [100,90,80,75,70]
 
 for n,m in zip(n_list,m_list):
 
@@ -159,11 +159,9 @@ for n,m in zip(n_list,m_list):
             
             checker = 'no'
 
-            # if tags['DATE'].iloc[i] == '08.02' and instrument_name =='EURAUD':
-            #     print('here')
 
 
-            #CALCULATING THE MA
+            # CALCULATING THE MA
             # n= 5            
             # m = 10
             if len(close_pricing_list_1) < n:
@@ -218,7 +216,7 @@ for n,m in zip(n_list,m_list):
             # except:
             #     moving_average_2  = (sum(close_pricing_list_2))/m
             
-            
+            freq += 1
             
         
             ######iterating over days now
@@ -357,6 +355,7 @@ for n,m in zip(n_list,m_list):
     dates_ml.to_csv('Results/Optimal Moving Average ' + str(n) + "_" + str(m) + '.csv')
 
     print("the MA for this is " + str(n) + " and " + str(m) + ":   " + str(column_sum(dates_ml)))
+    print("frequnecy = " + str(freq))
     # print(number_of_misses)
     # print(total)
         
