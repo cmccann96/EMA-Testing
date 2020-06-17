@@ -269,12 +269,12 @@ for n,m in zip(n_list,m_list):
                     
                     
                 if k == 45 and counter == 0:
-                    # counter += 1
+                    counter += 1
                     number_of_misses += 1
                     break
 
                 if k ==45 and counter == 1:
-                    # counter += 0.5
+                    counter += 0.5
                     break
 
                     
